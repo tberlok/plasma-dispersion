@@ -5,5 +5,5 @@ python:
 
 clean:
 	python setup.py clean
-	rm -rf C.2 vlasov/cython/*.{c,so,html}
-	rm -rf vlasov/__pycache__ skeletor/cython/__pycache__
+	rm -rf C.2 vlasov/cython/*.{c,cpp,so,html}
+	rm -rf vlasov/__pycache__ vlasov/cython/__pycache__
