@@ -1,0 +1,7 @@
+vlasov/cython/*.html
+vlasov/cython/*.cpp
+vlasov/cython/*.c
+vlasov/cython/*.so
+vlasov/__pycache__/
+vlasov/cython/__pycache__/
+build/
