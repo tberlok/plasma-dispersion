@@ -4,12 +4,12 @@ import numpy as np
 
 class Species(species_t):
 
-    def __init__(self, Tpar, Tperp, B0, mass=1, charge=1, n=1, v0=0):
+    def __init__(self, Tpar, Tperp, mass=1, charge=1, n0=1, v0=0):
 
         self.mass = mass
         self.charge = charge
         # Number density
-        self.n = n
+        self.n0 = n0
         # Drift velocity
         self.v0 = v0
         # Parallel and perpendicular pressure
@@ -21,6 +21,3 @@ class Species(species_t):
         # Parallel thermal velocity
         self.vt = np.sqrt(Tpar/mass)
         self.vtp = np.sqrt(Tperp/mass)
-
-        # Cyclotron frequency
-        self.oc = charge*B0/mass
