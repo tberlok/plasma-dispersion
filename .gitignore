@@ -5,3 +5,4 @@ vlasov/cython/*.so
 vlasov/__pycache__/
 vlasov/cython/__pycache__/
 build/
+figures/
