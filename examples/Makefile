@@ -1,0 +1,2 @@
+../figures/%.eps: %.py
+	python $<

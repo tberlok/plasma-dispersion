@@ -59,5 +59,4 @@ for kvec in kvecs:
     axes[0].plot(kvec, omega.imag, '-')
 axes[1].set_ylabel(r"$Re(\omega/\Omega)$")
 axes[0].set_ylabel(r"$Im(\omega/\Omega)$")
-plt.savefig("figures/oblique_mirror.eps")
-plt.show()
+plt.savefig("../figures/oblique_mirror.eps")
