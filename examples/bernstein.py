@@ -23,7 +23,7 @@ kpar = 1e-8
 omega = np.zeros(Nk, dtype=Complex)
 
 # Guess for first solution
-omega[0] = 2 + 1e-4j
+omega[0] = 1 + 1e-4j
 
 # Get the first root
 omega[0] = newton(vlasov.det, omega[0], args=(kpar, kperp[0]))
