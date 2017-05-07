@@ -12,10 +12,19 @@ This code is still work in progress but so far it can reproduce most of the
 figures in the [HYDROS paper](https://arxiv.org/pdf/1605.07225.pdf),
 "A linear dispersion relation for the hybrid
 kinetic-ion/fluid-electron model of plasma physics" by
-D. Told, J. Cookmeyer, P. Astfalk and F. Jenko. The code presented here does
+D. Told, J. Cookmeyer, P. Astfalk and F. Jenko. Notable exceptions are the
+plot for the oblique firehose instability and the fastwave which I still
+need to figure out.
+
+The code presented here does
 not yet include resistivity but it is not limited to a single ion species.
 I also hope to add support for drifting distribution functions in the near
 future.
+
+It might also prove useful to reproduce some of the plots in
+the paper [Comparative study of gyrokinetic, hybrid-kinetic and
+fully kinetic wave physics for
+space plasmas](https://arxiv.org/pdf/1605.08385v1.pdf).
 
 The code uses scipy's Newton-Raphson method which, however, falls back to the
 secant method when the derivative of the function is not provided. I intend
