@@ -45,7 +45,12 @@ Compilation can be done using make
 ```
 $ make
 ```
-and all the examples can be run by simply doing
+It is also a good idea to the directory to your python path. On my computer
+this would be
+```
+$ export PYTHONPATH=$PYTHONPATH:/Users/berlok/projects/plasma-dispersion
+```
+All the examples can be run by simply doing
 ```
 $ make figures
 ```
