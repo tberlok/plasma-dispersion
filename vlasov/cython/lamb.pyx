@@ -26,7 +26,7 @@ def lambda_tensor(complex_t omega, real_t kpar, real_t kperp, species_t s):
     cdef int n_arr[2003]
     cdef real_t Gamma[2003]
     cdef real_t GammaP[2001]
-    cdef real_t tol = 1e-12
+    cdef real_t tol = 1e-16
     cdef int n, count, i, j
     cdef complex_t T[9]
     cdef complex_t a[9]
