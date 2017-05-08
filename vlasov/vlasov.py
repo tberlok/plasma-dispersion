@@ -4,7 +4,7 @@ import numpy as np
 
 class Vlasov():
 
-    def __init__(self, B0, species):
+    def __init__(self, B0, species, relativistic=False):
         self.kk = np.zeros((3, 3))
         self.sigma = np.zeros((3, 3), dtype=Complex)
         self.D = np.zeros((3, 3), dtype=Complex)
@@ -18,6 +18,10 @@ class Vlasov():
 
         # Mass density
         self.rho = 0
+
+        self.relativistic = relativistic
+        # Speed of light
+        self.c = 299792458.0
 
         for spec in species:
             # Cyclotron frequency
@@ -56,6 +60,8 @@ class Vlasov():
         self.get_k2(kpar, kperp)
         self.conductivity_tensor(omega, kpar, kperp)
         self.D = self.kk - self.k2 + 1j*self.mu0*omega*self.sigma
+        if self.relativistic:
+            self.D += (omega/self.c)**2*np.identity(3)
 
     def det(self, omega, kpar, kperp):
         self.dispersion_tensor(omega, kpar, kperp)
