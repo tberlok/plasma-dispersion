@@ -39,9 +39,15 @@ Furthermore, it should also be simple to implement the standard textbook
 plasma dispersion relation where the displacement current is included in the
 derivation.
 
-# How to use
+# Requirements
+Assuming you already have Python 3 installed you can install the rest of the
+requirements using:
+```
+$ pip install -r requirements.txt
+```
 
-Compilation can be done using make
+# How to use
+Compilation can be done using
 ```
 $ make
 ```
