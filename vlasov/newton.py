@@ -109,7 +109,9 @@ def newton(func, x0, fprime=None, args=(), tol=1.48e-8, maxiter=50,
             else:
                 p = p1 - q1*(p1 - p0)/(q1 - q0)
             if abs(p - p1) < tol:
-                return p
+                if abs((p - p1).imag) < tol and abs((p - p1).imag) < tol:
+                    if abs(q1) < tol:
+                        return p
             p0 = p1
             q0 = q1
             p1 = p
