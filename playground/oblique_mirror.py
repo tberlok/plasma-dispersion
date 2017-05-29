@@ -2,7 +2,7 @@ from vlasov import Species, Electrons, VlasovFluid, Vlasov
 from vlasov.cython.types import Complex
 import numpy as np
 import matplotlib.pyplot as plt
-from scipy.optimize import newton
+from vlasov import newton
 
 # This example shows how the oblique mirror instability has the same growth
 # rate using the Vlasov-Fluid model and the full Vlasov model in the limit
@@ -20,7 +20,8 @@ beta_perp = 10
 
 Te = 1e-4
 
-tol = 1e-10
+tol = 1e-12
+maxiter = 1000
 
 mu0 = 1
 
@@ -58,13 +59,15 @@ for kvec in kvecs:
     omega[0] = 1e-4 + 0.027820200887704144j
     kpar = kvec[0]*np.cos(theta)
     kperp = kvec[0]*np.sin(theta)
-    omega[0] = newton(vlasov.det, omega[0], args=(kpar, kperp))
+    omega[0] = newton(vlasov.det, omega[0], args=(kpar, kperp), tol=tol,
+                      maxiter=maxiter)
 
     for i in range(1, Nk):
         kpar = kvec[i]*np.cos(theta)
         kperp = kvec[i]*np.sin(theta)
-        omega[i] = newton(vlasov.det, omega[i-1], args=(kpar, kperp), tol=tol)
-        assert(np.abs(vlasov.det(omega[i], kpar, kperp)) < tol)
+        omega[i] = newton(vlasov.det, omega[i-1], args=(kpar, kperp), tol=tol,
+                          maxiter=maxiter)
+        assert(np.abs(vlasov.det(omega[i], kpar, kperp)) < 100*tol)
 
     axes[1].plot(kvec, omega.real, 'C0-')
     if first:
@@ -95,14 +98,15 @@ for kvec in kvecs:
     omega[0] = 1e-4 + 0.027820200887704144j
     kpar = kvec[0]*np.cos(theta)
     kperp = kvec[0]*np.sin(theta)
-    omega[0] = newton(vlasov.det, omega[0], args=(kpar, kperp), maxiter=1000)
+    omega[0] = newton(vlasov.det, omega[0], args=(kpar, kperp),
+                      maxiter=maxiter)
 
     for i in range(1, Nk):
         kpar = kvec[i]*np.cos(theta)
         kperp = kvec[i]*np.sin(theta)
         omega[i] = newton(vlasov.det, omega[i-1], args=(kpar, kperp),
-                          maxiter=1000, tol=tol)
-        assert(np.abs(vlasov.det(omega[i], kpar, kperp)) < tol)
+                          maxiter=maxiter, tol=tol)
+        assert(np.abs(vlasov.det(omega[i], kpar, kperp)) < 100*tol)
 
     axes[1].plot(kvec, omega.real, 'C1--')
     if first:
