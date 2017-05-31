@@ -5,3 +5,4 @@ from .vlasovfluid import VlasovFluid
 from .vlasov import Vlasov
 from .newton import newton
 from .solver import Solver
+from .guesser import make_guess
