@@ -19,7 +19,7 @@ class Solver:
         if np.abs(self.disp.det(omega, kpar, kperp)) < 1000*self.tol:
             return omega
 
-    def __call__(self, kstart, kend, steps, theta, guess):
+    def __call__(self, kstart, kend, steps, theta, guess, tag=None):
         k = np.linspace(kstart, kend, steps)
         kpar = k*np.cos(theta)
         kperp = k*np.sin(theta)
@@ -37,7 +37,7 @@ class Solver:
                 break
 
         self.solutions.append({'omega': omega[:i-1], 'k': k[:i-1],
-                               'theta': theta})
+                               'theta': theta, 'tag': tag})
 
     def create_data(self):
         for m in range(self.M):
