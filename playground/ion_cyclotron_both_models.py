@@ -1,8 +1,6 @@
 from vlasov import Species, Electrons, VlasovFluid, Vlasov, Solver
-from vlasov.cython.types import Complex
 import numpy as np
 import matplotlib.pyplot as plt
-from scipy.optimize import newton
 
 # Magnetic field strength
 B0 = 1.
