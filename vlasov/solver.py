@@ -19,11 +19,10 @@ class Solver:
         if np.abs(self.disp.det(omega, kpar, kperp)) < 1000*self.tol:
             return omega
 
-    def __call__(self, kstart, kend, steps, theta, guess, tag=None):
+    def __call__(self, kstart, kend, steps, theta, guess):
         k = np.linspace(kstart, kend, steps)
         kpar = k*np.cos(theta)
         kperp = k*np.sin(theta)
-
 
         omega = np.zeros(steps, dtype=Complex)
         omega[0] = guess
@@ -37,7 +36,7 @@ class Solver:
                 break
 
         self.solutions.append({'omega': omega[:i-1], 'k': k[:i-1],
-                               'theta': theta, 'tag': tag})
+                               'theta': theta})
 
     def create_data(self):
         for m in range(self.M):
@@ -53,7 +52,35 @@ class Solver:
                 data = np.concatenate((data, temp))
         return data
 
+    def iterate(self, k, theta, k0, guess):
+        steps = len(k)
+        kpar = k*np.cos(theta)
+        kperp = k*np.sin(theta)
+
+        index = np.argmin(abs(k-k0))
+
+        omega = np.zeros(steps, dtype=Complex)
+        omega[index] = guess
+        omega[index] = self.solve(omega[index], kpar[index], kperp[index])
+
+        for i in range(index+1, steps):
+            result = self.solve(omega[i-1], kpar[i], kperp[i])
+            if result is not None:
+                    omega[i] = result
+            else:
+                omega[i:] = np.nan + 1j*np.nan
+                break
+
+        for i in range(index-1, -1, -1):
+            result = self.solve(omega[i+1], kpar[i], kperp[i])
+            if result is not None:
+                    omega[i] = result
+            else:
+                omega[:i+1] = np.nan + 1j*np.nan
+                break
+
+        self.solutions.append({'omega': omega, 'k': k, 'theta': theta})
+
     @property
     def M(self):
         return len(self.solutions)
-
